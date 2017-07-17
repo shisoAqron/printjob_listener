@@ -1,39 +1,27 @@
-import java.io.*;
-import javax.print.*;
-import javax.print.attribute.*;
-import javax.print.attribute.standard.*;
-//import javax.print.event.*;
+Printer pri;
+Data d;
 
-import javax.print.PrintServiceLookup;
-
-PrintService ps;
+String t = "queued-job:";
 
 void setup() {
   size(400, 300);
-  textAlign(CENTER,CENTER);
 
-  ps = PrintServiceLookup.lookupDefaultPrintService();
-  //get_defaultPrinter
-  
-  /*name jobcount is-accept*/
-  //for (Attribute attribute : ps.getAttributes().toArray()) {
-  //  System.out.println(attribute.getName() + ":" + attribute);
-  //}
-  
-  //println(ps.getAttributes().toArray());
+  pri = new Printer();
+  d = new Data("savedata.csv");
+
+  textAlign(CENTER, CENTER);
 }
 
 
-void draw(){
+void draw() {
   background(255);
-  String t = "job:";
-  for (Attribute attribute : ps.getAttributes().toArray()) {
-    //System.out.println(attribute.getName() + ":" + attribute);
-    if(attribute.getName()=="queued-job-count") t+=attribute;
-  }
-  
+  pri.update_jobCount();
+
   fill(0);
   textSize(50);
-  text(t,width/2,height/2);
-  
+  text(t+pri.jobCount, width/2, height/2);
+}
+
+void mousePressed() {
+  d.add_data();
 }
