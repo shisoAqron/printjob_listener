@@ -7,10 +7,8 @@ class Data {
     this.dataName = dn;
     file = new File(dataPath(dataName));
     if (file.exists()) {
-      println("arude~~~~");
       this.load_data();
     } else {
-      println("noide~~~");
       this.create_data();
     }
   }

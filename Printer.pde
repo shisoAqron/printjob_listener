@@ -13,8 +13,7 @@ class Printer {
   Printer() {
     this.ps = PrintServiceLookup.lookupDefaultPrintService();
     this.update_name();
-    println(this.name);
-    this.update_jobCount(d);
+    this.update_jobCount();
   }
 
   private void update_name() {
@@ -24,16 +23,18 @@ class Printer {
     }
   }
 
-  public void update_jobCount(Data data) {
+  public boolean update_jobCount() {
+    boolean result = false;
     String tmpjob = "";
     for (Attribute attribute : ps.getAttributes().toArray()) {
       if (attribute.getName()=="queued-job-count") tmpjob+=attribute;
     }
     if(this.jobCount<Integer.valueOf(tmpjob)) {
       println("created new job!!!");
-      data.add_data();
+      result = true;
     }
     this.jobCount = Integer.valueOf(tmpjob);
+    return result;
   }
 
   //get_defaultPrinter
