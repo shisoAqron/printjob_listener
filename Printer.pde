@@ -8,13 +8,13 @@ import javax.print.PrintServiceLookup;
 class Printer {
   PrintService ps;
   String name = "";
-  String jobCount = "";
+  int jobCount = 0;
 
   Printer() {
     this.ps = PrintServiceLookup.lookupDefaultPrintService();
     this.update_name();
     println(this.name);
-    this.update_jobCount();
+    this.update_jobCount(d);
   }
 
   private void update_name() {
@@ -24,11 +24,16 @@ class Printer {
     }
   }
 
-  public void update_jobCount() {
-    this.jobCount = "";
+  public void update_jobCount(Data data) {
+    String tmpjob = "";
     for (Attribute attribute : ps.getAttributes().toArray()) {
-      if (attribute.getName()=="queued-job-count") this.jobCount+=attribute;
+      if (attribute.getName()=="queued-job-count") tmpjob+=attribute;
     }
+    if(this.jobCount<Integer.valueOf(tmpjob)) {
+      println("created new job!!!");
+      data.add_data();
+    }
+    this.jobCount = Integer.valueOf(tmpjob);
   }
 
   //get_defaultPrinter

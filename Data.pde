@@ -25,7 +25,7 @@ class Data {
     this.table = loadTable("data/"+dataName, "header");
   }
 
-  private void add_data() {
+  public void add_data() {
     TableRow newRow = this.table.addRow();
     newRow.setInt("id", this.table.getRowCount() - 1);
     newRow.setString("timestamp", get_timestamp());
@@ -38,5 +38,9 @@ class Data {
     tt+=year()+nf(month(), 2)+nf(day(), 2);
     tt+=nf(hour(), 2)+nf(minute(), 2)+nf(second(), 2);
     return tt;
+  }
+  
+  public int get_tableCount(){
+    return this.table.getRowCount();
   }
 }

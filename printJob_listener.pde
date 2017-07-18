@@ -1,8 +1,6 @@
 Printer pri;
 Data d;
 
-String t = "queued-job:";
-
 void setup() {
   size(400, 300);
 
@@ -15,13 +13,14 @@ void setup() {
 
 void draw() {
   background(255);
-  pri.update_jobCount();
+  pri.update_jobCount(d);
 
   fill(0);
   textSize(50);
-  text(t+pri.jobCount, width/2, height/2);
+  text("queued-job:"+pri.jobCount, width/2, height/2-50);
+  text("tablecount:"+d.get_tableCount(), width/2, height/2+50);
 }
 
 void mousePressed() {
-  d.add_data();
+  //d.add_data();
 }
