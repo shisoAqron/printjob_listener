@@ -7,11 +7,21 @@ import javax.print.PrintServiceLookup;
 
 class Printer {
   PrintService ps;
-  String jobCount;
+  String name = "";
+  String jobCount = "";
 
   Printer() {
     this.ps = PrintServiceLookup.lookupDefaultPrintService();
-    this.jobCount = "";
+    this.update_name();
+    println(this.name);
+    this.update_jobCount();
+  }
+
+  private void update_name() {
+    this.name = "";
+    for (Attribute attribute : ps.getAttributes().toArray()) {
+      if (attribute.getName()=="printer-name") this.name+=attribute;
+    }
   }
 
   public void update_jobCount() {
