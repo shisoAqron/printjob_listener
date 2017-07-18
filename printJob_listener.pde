@@ -1,26 +1,37 @@
 import java.awt.*;
+import controlP5.*;
 
 Printer pri;
 Data d;
 
 /*setLocation*/
-PVector window_point = new PVector(800,50);
+PVector window_point = new PVector(800, 50);
 PVector start_point = new PVector();
 
+ControlP5 button;
 
 /*setVisible*/
 boolean show;
+
+int [] code = new int[4];
+
 
 void settings() {
   fullScreen();
 }
 
 void setup() {
-  //size(400, 300);
   surface.setSize(400, 300);
 
   pri = new Printer();
   d = new Data("savedata.csv");
+
+  ControlFont cf1 = new ControlFont(createFont("Arial", 20));
+  button = new ControlP5(this);
+  button.addButton("exit")
+    .setLabel("minimize")
+    .setPosition(width/2+70, height-60)
+    .setSize(100, 40);  
 
   show = true;
 
@@ -31,21 +42,26 @@ void dispose() {
   println("exit.");
 }
 
+/* imvisible window */
+void exit() {
+  show = false;
+}
+
 
 void draw() {
   surface.setVisible(show);
   surface.setLocation((int)window_point.x, (int)window_point.y);
 
-  if(pri.update_jobCount()){
+  if (pri.update_jobCount()) {
     show = true;
     d.add_data();
   }
-  
+
   background(255);
   /* window frame */
   noFill();
   strokeWeight(20);
-  rect(0,0,width,height);
+  rect(0, 0, width, height);
 
   /* draw text message */
   fill(0);
@@ -59,7 +75,6 @@ void draw() {
 
 void mousePressed() {
   //d.add_data();
-  //show = false;
 
   /*set mouse start point*/
   start_point.x = mouseX;
@@ -74,9 +89,16 @@ void mouseDragged() {
 }
 
 void keyPressed() {
-  //ignore ESC key
-  if (key == ESC) {
-    key = 0;
-    show = false;
+  /* command of exit*/
+  String t = "";
+  for(int i=0;i<3;i++){
+    code[i] = code[i+1];
+    t+=code[i];
+  }
+  code[3] = keyCode;
+  t+=code[3];
+
+  if(Integer.valueOf(t)==75737676){
+    super.exit();
   }
 }
