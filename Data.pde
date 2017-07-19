@@ -17,18 +17,27 @@ class Data {
     this.table = new Table();
     this.table.addColumn("id");
     this.table.addColumn("timestamp");
+    this.table.addColumn("action");
+    
+    saveTable(this.table, "data/"+dataName);
   }
 
   private void load_data() {
     this.table = loadTable("data/"+dataName, "header");
   }
 
-  public void add_data() {
+  public void add_data(String act) {
     TableRow newRow = this.table.addRow();
     newRow.setInt("id", this.table.getRowCount() - 1);
     newRow.setString("timestamp", get_timestamp());
+    newRow.setString("action", act);
 
     saveTable(this.table, "data/"+dataName);
+  }
+  
+  private void reset_data(){
+    this.file.delete();
+    this.create_data();
   }
 
   private String get_timestamp() {
