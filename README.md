@@ -2,8 +2,9 @@
 
 ## what is this ?
 レーザカッターの使用ログを監視できるくんを作ろうとした
-![fig01](fig01.png)
-![fig02](fig02.png)
+
+![fig01](https://raw.githubusercontent.com/shisoAqron/printjob_listener/master/fig01.PNG)
+![fig02](https://raw.githubusercontent.com/shisoAqron/printjob_listener/master/fig02.PNG)
 
 最低限の要件としては
 - いつ使われたか
