@@ -36,7 +36,7 @@ void setup() {
   pri = new Printer();
   d = new Data("savedata.csv");
 
-  ControlFont cf1 = new ControlFont(createFont("Arial", 20));
+  //ControlFont cf1 = new ControlFont(createFont("Arial", 20));
   button = new ControlP5(this);
   button.addButton("exit")
     .setLabel("minimize")
@@ -62,11 +62,15 @@ void draw() {
     d.add_data("print_job");
   }
 
+  if(!show) return;
+  
+  /* background */
   if (d.get_tableCount()<time) {
     background(255);
   } else {
-    background(255,0,0);
+    background(255, 0, 0);
   }
+
   /* window frame */
   noFill();
   strokeWeight(20);
@@ -94,12 +98,14 @@ void draw() {
 }
 
 void mousePressed() {
+  if (!show) return;
   /*set mouse start point*/
   start_point.x = mouseX;
   start_point.y = mouseY;
 }
 
 void mouseDragged() {
+  if (!show) return;
   /*set window point from drag distance*/
   Point mouse = MouseInfo.getPointerInfo().getLocation();
   window_point.x = mouse.x - start_point.x;
@@ -107,6 +113,7 @@ void mouseDragged() {
 }
 
 void keyPressed() {
+  if (!show) return;
   /* command of exit*/
   String t = "";
   for (int i=0; i<3; i++) {

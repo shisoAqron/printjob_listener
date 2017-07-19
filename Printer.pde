@@ -1,7 +1,6 @@
-import java.io.*;
+//import java.io.*;
 import javax.print.*;
 import javax.print.attribute.*;
-import javax.print.attribute.standard.*;
 //import javax.print.event.*;
 import javax.print.PrintServiceLookup;
 
