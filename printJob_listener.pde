@@ -1,8 +1,10 @@
 import java.awt.*;
 import controlP5.*;
+import http.requests.*;
 
 Printer pri;
 Data d;
+Bot b;
 
 /* windowSize(show&PC)*/
 int win_x, win_y;
@@ -35,6 +37,7 @@ void setup() {
 
   pri = new Printer();
   d = new Data("savedata.csv");
+  b = new Bot("your slack API token");
 
   //ControlFont cf1 = new ControlFont(createFont("Arial", 20));
   button = new ControlP5(this);
@@ -60,6 +63,7 @@ void draw() {
   if (pri.update_jobCount()) {
     show = true;
     d.add_data("print_job");
+    b.send_mes("bot_sandbox","レーザ加工されました：累計"+d.get_tableCount()+"回目です");
   }
 
   if(!show) return;
@@ -129,6 +133,10 @@ void keyPressed() {
   /* debug command*/
   if (key==ENTER) {
     d.add_data("print_job");
+  }
+  if(key == TAB){
+    b.send_mes("bot_sandbox","テストテスト");
+    //b.send_mes("bot_sandbox","レーザ加工されました：累計"+d.get_tableCount()+"回目です");
   }
 }
 
