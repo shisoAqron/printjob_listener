@@ -6,6 +6,11 @@ Printer pri;
 Data d;
 Bot b;
 
+/* create&put your token in text file!!!
+   printer_joblister/data/token.txt
+*/
+String []token;
+
 /* windowSize(show&PC)*/
 int win_x, win_y;
 Dimension PCwindow;
@@ -37,7 +42,8 @@ void setup() {
 
   pri = new Printer();
   d = new Data("savedata.csv");
-  b = new Bot("your slack API token");
+  token = loadStrings("token.txt");
+  if(token[0]!="") b = new Bot(token[0]);
 
   //ControlFont cf1 = new ControlFont(createFont("Arial", 20));
   button = new ControlP5(this);
